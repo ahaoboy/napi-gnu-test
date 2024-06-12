@@ -1,4 +1,4 @@
-name: CI
+name: test
 
 permissions:
   contents: write
@@ -52,4 +52,5 @@ jobs:
           ls -l
       - name: "test"
         run: |
+         cp ./package-template.win32-x64-gnu.node ./package-template.win32-x64-msvc.node
          pnpm run test
