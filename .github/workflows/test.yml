@@ -27,7 +27,6 @@ jobs:
           cargo -V
           rustc -V
           pnpm run build
-          ls -l
       - name: "test"
         run: |
          pnpm run test
@@ -49,7 +48,6 @@ jobs:
           cargo -V
           rustc -V
           pnpm run build
-          ls -l
       - name: "test"
         run: |
          cp ./package-template.win32-x64-gnu.node ./package-template.win32-x64-msvc.node
