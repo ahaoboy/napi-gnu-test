@@ -22,6 +22,7 @@ jobs:
           rustup set default-host nightly-x86_64-pc-windows-msvc
           rustup override set nightly-x86_64-pc-windows-msvc
           npm i pnpm -g
+          pnpm install
       - name: "build"
         run: |
           cargo -V
@@ -43,6 +44,7 @@ jobs:
           rustup set default-host nightly-x86_64-pc-windows-gnu
           rustup override set nightly-x86_64-pc-windows-gnu
           npm i pnpm -g
+          pnpm install
       - name: "build"
         run: |
           cargo -V
