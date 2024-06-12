@@ -1,0 +1,55 @@
+name: CI
+
+permissions:
+  contents: write
+
+on:
+  pull_request:
+  push:
+    tags:
+      - '**[0-9]+.[0-9]+.[0-9]+*'
+jobs:
+  msvc:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: "install"
+        run: |
+          rustup target add nightly-x86_64-pc-windows-msvc
+          rustup toolchain install nightly-x86_64-pc-windows-msvc
+          rustup default nightly-x86_64-pc-windows-msvc
+          rustup set default-host nightly-x86_64-pc-windows-msvc
+          rustup override set nightly-x86_64-pc-windows-msvc
+          npm i pnpm -g
+      - name: "build"
+        run: |
+          cargo -V
+          rustc -V
+          pnpm run build
+          ls -l
+      - name: "test"
+        run: |
+         pnpm run test
+  gnu:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: "install"
+        run: |
+          rustup target add x86_64-pc-windows-gnu
+          rustup toolchain install nightly-x86_64-pc-windows-gnu
+          rustup default nightly-x86_64-pc-windows-gnu
+          rustup set default-host nightly-x86_64-pc-windows-gnu
+          rustup override set nightly-x86_64-pc-windows-gnu
+          npm i pnpm -g
+      - name: "build"
+        run: |
+          cargo -V
+          rustc -V
+          pnpm run build
+          ls -l
+      - name: "test"
+        run: |
+         pnpm run test
